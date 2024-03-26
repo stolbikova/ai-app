@@ -3,12 +3,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 interface WorkerMessageEvent extends MessageEvent {
-  data: any;
+  data: {
+    status: string;
+    output: string[];
+  };
 }
 
 const Home = () => {
   // Keep track of the classification result and the model loading status.
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<string | null>(null);
   const [ready, setReady] = useState<boolean | null>(null);
 
   const worker = useRef<Worker | null>(null);
